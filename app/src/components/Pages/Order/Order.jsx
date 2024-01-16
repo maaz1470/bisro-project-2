@@ -8,10 +8,10 @@ import OrderTab from './OrderTab';
 import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 const Order = () => {
+    
     const categories = ['salad', 'pizza','soup', 'dessert', 'drinks']
     const { category } = useParams();
     const initialIndex = categories.indexOf(category.toLowerCase())
-    console.log(categories)
     const [tabIndex, setTabIndex] = useState(initialIndex)
     const [menu] = useMenu();
     const desserts = menu.filter(item => item.category === 'dessert')
