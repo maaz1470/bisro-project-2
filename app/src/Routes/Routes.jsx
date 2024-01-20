@@ -4,11 +4,15 @@ import Main from "../components/Layout/Main";
 import Home from "../components/Pages/Home/Home";
 import Menu from "../components/Pages/Menu/Menu";
 import Order from "../components/Pages/Order/Order";
+import Auth from "../components/Layout/Auth";
+import Login from "../components/Pages/Auth/Login";
+import Register from "../components/Pages/Auth/Register";
+import ProtectedRoutes from "./ProtectedRoutes";
 
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <Main></Main>,
+        element: <ProtectedRoutes><Main></Main></ProtectedRoutes>,
         children: [
             {
                 path: '/',
@@ -27,6 +31,20 @@ const router = createBrowserRouter([
     {
         path: '/about',
         element: <h1>Hello World</h1>
+    },
+    {
+        path: '/auth',
+        element: <Auth />,
+        children: [
+            {
+                path: 'login',
+                element: <Login />
+            },
+            {
+                path: 'register',
+                element: <Register />
+            }
+        ]
     }
 ])
 
