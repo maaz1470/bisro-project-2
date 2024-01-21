@@ -1,9 +1,13 @@
 import { useContext } from "react"
 import { Link } from "react-router-dom"
 import { AuthContext } from "../../Provider/AuthProvider"
+import useCart from "../hook/useCart"
 
 export default function NavBar() {
     const { user, logOut } = useContext(AuthContext)
+
+    const [cart] = useCart();
+
 
     const handleLogout = () => {
         logOut().then(() => {
@@ -22,6 +26,18 @@ export default function NavBar() {
                     <li><Link to={'/auth/register'}>Register</Link></li>
                 </>
             }
+            {
+                user && (
+                    <>
+                        <li>
+                            <button className="btn hover:text-white">
+                                Cart
+                                <div className="badge badge-secondary">{cart?.length}</div>
+                            </button>
+                        </li>
+                    </>
+                )
+            }
         </>
     )
     return (
@@ -36,7 +52,7 @@ export default function NavBar() {
                     </ul>
 
                 </div>
-                <a className="btn btn-ghost text-xl">Bistro Boss</a>
+                <Link to={'/'} className="btn btn-ghost text-xl">Bistro Boss</Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
